@@ -54,7 +54,8 @@ Representa una película concreta.
 - R1: La duración debe ser mayor o igual que uno (duracion >= 1).
 - R2: La recaudación debe tener valores positivos (recaudacion >= 0).
 - R3: La puntuación no puede ser negativa (puntuacion >=0).
-***Criterio de igualdad**: Dos películas son iguales si todas sus propiedades básicas son iguales.
+
+**Criterio de igualdad**: Dos películas son iguales si todas sus propiedades básicas son iguales.
 
 **Criterio de ordenación**: Por fecha de estreno.
 
