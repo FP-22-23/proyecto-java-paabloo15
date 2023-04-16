@@ -4,15 +4,15 @@ import java.time.LocalDate;
 import java.util.List;
 
 import fp.Movies;
-import fp.TipoSaga;
+import fp.TipoPelicula;
 
 public class TestMovies {
 
 	public static void main(String[] args) {
 		//PRUEBA DEL MÉTODO TOSTRING
 				Movies m1 = new Movies(LocalDate.of(2014, 10, 30),"Acción", 8.7, 123, "The Avengers", 
-						34567898, "Marvel Studios", true,TipoSaga.SAGA,List.of("Tom Holland","Mark Ruffalo"));
-				Movies m2 = new Movies(LocalDate.of(2019, 2, 15),null, 8.0, 102, "Us", 7656543, null,null, null, null);
+						345.0, "Marvel Studios", true,TipoPelicula.NUEVA,List.of("Tom Holland","Mark Ruffalo"));
+				Movies m2 = new Movies(LocalDate.of(2019, 2, 15),null, 8.0, 102, "Us", 765.0, null,null, null, null);
 				System.out.println(m1.toString());
 				System.out.println(m2.toString());
 		    
@@ -30,7 +30,7 @@ public class TestMovies {
 			System.out.println(m1.getTipo());
 			System.out.println(m1.getAñoProduccion());
 		    System.out.println(m1.getPopularidad());
-		    System.out.println(m1.getActores());
+		    System.out.println(m1.getOtrasTematicas());
 
 			
 			
@@ -41,10 +41,10 @@ public class TestMovies {
 			m2.setEstudio("UCM");
 			m1.setDuracion(105);
 			m2.setPuntuacion(7.0);
-			m1.setRecaudacion(6333431);
+			m1.setRecaudacion(633.3431);
 			m1.setMundial(false);
-			m2.setTipo(TipoSaga.SAGA);
-			m2.setActores(List.of("Antonio Banderas"));
+			m2.setTipo(TipoPelicula.ANTIGUA);
+			m2.setOtrasTematicas(List.of("Antonio Banderas"));
 			
 			
 				

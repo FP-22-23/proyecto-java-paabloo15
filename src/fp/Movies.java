@@ -9,15 +9,15 @@ import utiles.Checkers;
 public class Movies implements Comparable <String> {
 
 	private LocalDate fechaEstreno;
-	private Double puntuacion;
-	private Integer duracion,recaudacion;
+	private Double puntuacion,recaudacion;
+	private Integer duracion;
 	private String titulo,estudio,tematica;
 	private Boolean mundial;
-	private TipoSaga tipo;
-	private List <String> actores;
+	private TipoPelicula tipo;
+	private List <String> otrasTematicas;
 	
-	public Movies(LocalDate fechaEstreno,String tematica, Double puntuacion, Integer duracion, String titulo, Integer recaudacion, 
-			String estudio, Boolean mundial, TipoSaga tipo,List<String> actores) {
+	public Movies(LocalDate fechaEstreno,String tematica, Double puntuacion, Integer duracion, String titulo, Double recaudacion, 
+			String estudio, Boolean mundial, TipoPelicula tipo,List<String> otrasTematicas) {
 		
 		Checkers.check("La duración debe valer mayor o igual que uno", 
 				duracion>=1);
@@ -35,11 +35,11 @@ public class Movies implements Comparable <String> {
 		this.estudio = estudio;
 		this.mundial = mundial;
 		this.tipo = tipo;
-		this.actores = actores;
+		this.otrasTematicas = otrasTematicas;
 		
 	}
 	
-	public Movies(LocalDate fechaEstreno,Integer duracion,String titulo, Integer recaudacion, Double puntuacion) {
+	public Movies(LocalDate fechaEstreno,Integer duracion,String titulo, Double puntuacion, Double recaudacion) {
 		
 		this.fechaEstreno = fechaEstreno;
 		this.tematica = null;
@@ -50,14 +50,14 @@ public class Movies implements Comparable <String> {
 		this.estudio = null;
 		this.mundial = null;
 		this.tipo = null;
-		this.actores = null;
+		this.otrasTematicas = null;
 	}
 	
 	//MÉTODO TOSTRING
 			public String toString() {
 				return "Movies = [fechaEstreno = " + fechaEstreno + "tematica = " + tematica + ", puntuacion = " + puntuacion + ", duracion = " 
 			            + duracion + ", titulo = " + titulo + ", recaudacion = " + recaudacion + ", estudio = " 
-						+ estudio + ", puntuacion = " + puntuacion + ", mundial = " + mundial +  ", TipoDuracion = " + "tipo" + "]";
+						+ estudio + ", puntuacion = " + puntuacion + ", mundial = " + mundial +  ", TipoPelicula = " + tipo + ", otrasTematicas = " + otrasTematicas + "]";
 			}
 			
 	
@@ -101,10 +101,10 @@ public class Movies implements Comparable <String> {
 		public void setTitulo(String titulo) {
 			this.titulo = titulo;
 		}
-		public Integer getRecaudacion() {
+		public Double getRecaudacion() {
 			return recaudacion;
 		}
-		public void setRecaudacion(Integer recaudacion) {
+		public void setRecaudacion(Double recaudacion) {
 			Checkers.check("La recaudación debe tener valores positivos", 
 					recaudacion>=0);
 			this.recaudacion = recaudacion;
@@ -121,18 +121,18 @@ public class Movies implements Comparable <String> {
 		public void setMundial(Boolean mundial) {
 			this.mundial = mundial;
 		}
-		public TipoSaga getTipo() {
+		public TipoPelicula getTipo() {
 			return tipo;
 		}
-		public void setTipo(TipoSaga tipo) {
+		public void setTipo(TipoPelicula tipo) {
 			this.tipo = tipo;
 		}
-		public List<String> getActores() {
-			return actores;
+		public List<String> getOtrasTematicas() {
+			return otrasTematicas;
 		}
 		
-		public void setActores(List<String> actores) {
-			this.actores = actores;
+		public void setOtrasTematicas(List<String> otrasTematicas) {
+			this.otrasTematicas = otrasTematicas;
 		}
 		
 		
