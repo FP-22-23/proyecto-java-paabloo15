@@ -66,3 +66,22 @@ Representa una película concreta.
 
 - TipoSaga, enumerado. Puede tomar los valores PELÍCULA,SAGA.
 
+### Factoría - FactoriaMovies
+La factoría es una clase que se encarga de construir objetos de tipo Película.
+
+- Método `leerPeliculas(String nomfich)`: Crea un objeto de tipo Películas a partir de la información recogida en el archivo CSV cuya ruta se pasa como parámetro.
+
+### Clase contenedora - Películas
+
+La clase Películas es una clase contenedora de objetos de tipo Película.
+
+**Propiedades**:
+- `peliculas`: de tipo `List<Película>`, es una lista de películas consultable. Representa las películas almacenadas en el contenedor.
+- `numeroPeliculas`: de tipo `Integer`, consultable. Representa el número de películas en el contenedor.
+
+**Constructores**:
+- C1: Constructor por defecto. Crea un objeto de tipo Películas sin ninguna película almacenada.
+- C2: Constructor con un parámetro de tipo `Collection<Película>`. Crea un objeto de tipo Películas con las películas incluidas en la colección dada como parámetro.
+- C3: Constructor con un parámetro de tipo `Stream<Película>`. Crea un objeto de tipo Películas con las películas incluidas en el Stream dado.
+
+**Criterio de igualdad**: Dos películas son iguales si tienen las mismas propiedades.
