@@ -2,9 +2,17 @@ package fp;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -138,29 +146,107 @@ public class ContenedorMovies implements Peliculas{
 		}
 
 		
+		public Boolean tieneAlgunasTematicas2(String tematica1, String tematica2) {
+			return peliculas.stream()
+	                .anyMatch(movie ->
+                    (movie.getTematica().equals(tematica1) && movie.getOtrasTematicas().contains(tematica2))
+            );
+}
+		
+		public Double getMediaRecaudacionPorTematica2(String tematica) {
+			return peliculas.stream()
+					.filter(p-> p.getTematica().equals(tematica))
+						.mapToDouble(p-> p.getRecaudacion())
+							.average()
+								.getAsDouble();
+						
+			}
+			
+		
+		public List<String> getPeliculasPorPuntuacion2(Double n) {
+			
+			return peliculas.stream()
+				.filter(p-> p.getPuntuacion()>= n)
+					.flatMap(pelicula -> List.of(pelicula.getTitulo(), String.valueOf(pelicula.getAñoProduccion())).stream())
+						.collect(Collectors.toList());
+		
+		
+		}
+		
+		
+		public Optional<String> getPeliculaConMasPuntuacionPorTematica(String tematica) {
+			return peliculas.stream()
+					.filter(p-> p.getTematica().equals(tematica))
+						.max(Comparator.comparingDouble(Movies::getPuntuacion))
+							.map(pelicula -> pelicula.getTitulo() + " (" + pelicula.getAñoProduccion() + ")");
+		}
+		
+		public List<String> getPeliculasOrdenadasPorRecaudacionDeUnaTematica(String tematica) {
+			return peliculas.stream()
+					.filter(p-> p.getTematica().equals(tematica))
+						.sorted(Comparator.comparing(Movies::getRecaudacion))
+							.map(p-> p.getTitulo() + " (" + p.getAñoProduccion() + ")")
+								.collect(Collectors.toList());
+		}
+		
+		public Map<String,List<String>> getPeliculasPorEstudio2(String estudio){
+			return peliculas.stream()
+		            .collect(Collectors.groupingBy(Movies::getEstudio, Collectors.mapping(Movies::getTitulo, Collectors.toList())));
+		}
+		
+		
+
+		public int obtenerNumeroTotalGeneros() {
+		    int generosUnicos = peliculas.stream()
+		            .map(Movies::getTematica)
+		            .collect(Collectors.collectingAndThen(
+		                    Collectors.toSet(),
+		                    Set::size
+		            ));
+
+		    return generosUnicos;
+		}
+		
+		
+		public Map<Integer, Movies> obtenerPeliculasMaxMinPorAñoProduccion() {
+		    Map<Integer, Movies> peliculasMaxMinPorAnio = peliculas.stream()
+		            .collect(Collectors.groupingBy(
+		                    Movies::getAñoProduccion,
+		                    Collectors.collectingAndThen(
+		                            Collectors.maxBy(Comparator.comparingInt(Movies::getAñoProduccion)),
+		                            Optional::get
+		                    )
+		            ));
+
+		    return peliculasMaxMinPorAnio;
+		}
+		
+		
+		public SortedMap<String, List<Movies>> obtenerNMejoresPorEstudio(int n) {
+		    SortedMap<String, List<Movies>> resultado = peliculas.stream()
+		            .collect(Collectors.groupingBy(Movies::getEstudio, TreeMap::new, Collectors.toList()));
+
+		    return resultado.entrySet().stream()
+		            .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().stream()
+		                    .sorted(Comparator.comparing(Movies::getPuntuacion).reversed())
+		                    .limit(n)
+		                    .collect(Collectors.toList()), (l1, l2) -> l1, TreeMap::new));
+		}
 		
 		
 		
+		public String obtenerPeliculaMayorRecaudacion() {
+		    Map<String, Double> peliculasRecaudacion = new HashMap<>();
+		    for (Movies pelicula : peliculas) {
+		        peliculasRecaudacion.put(pelicula.getTitulo(), pelicula.getRecaudacion());
+		    }
+
+		    Map.Entry<String, Double> entryMayorRecaudacion = Collections.max(peliculasRecaudacion.entrySet(), Map.Entry.comparingByValue());
+
+		    return entryMayorRecaudacion.getKey();
+		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		//TOSTRING
+
 		@Override
 		public String toString() {
 		    return "ContenedorMovies [ContenedorMovies =" + peliculas + "]";
@@ -192,6 +278,7 @@ public class ContenedorMovies implements Peliculas{
 				return false;
 			return true;
 		}
+		
 
 
 

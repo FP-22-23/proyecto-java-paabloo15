@@ -3,6 +3,10 @@ package fp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.SortedMap;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 public interface Peliculas {
 
@@ -26,7 +30,6 @@ public interface Peliculas {
 	
 	Boolean tieneAlgunasTematicas(String tematica1, String tematica2);
 
-
 	Double getMediaRecaudacionPorTematica(String tematica);
 
 	ArrayList<String> getPeliculasPorPuntuacion(Double n);
@@ -35,9 +38,25 @@ public interface Peliculas {
 	
 	public Map<String,Integer> getNumeroPeliculasPorTematica();
 
+	Boolean tieneAlgunasTematicas2(String tematica1, String tematica2);
+	
+	Double getMediaRecaudacionPorTematica2(String tematica);
+	
+	List<String> getPeliculasPorPuntuacion2(Double n);
+	
+	Optional <String> getPeliculaConMasPuntuacionPorTematica(String tematica);
+	
+	List<String> getPeliculasOrdenadasPorRecaudacionDeUnaTematica(String tematica);
+	
+	Map<String,List<String>> getPeliculasPorEstudio2(String estudio);
+	
+	int obtenerNumeroTotalGeneros();
+	
+	Map<Integer, Movies> obtenerPeliculasMaxMinPorAñoProduccion();
 
-
-
+	SortedMap<String, List<Movies>> obtenerNMejoresPorEstudio(int n);
+	
+	String obtenerPeliculaMayorRecaudacion();
 
 
 
